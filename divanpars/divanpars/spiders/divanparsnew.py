@@ -10,7 +10,7 @@ class DivanparsnewSpider(scrapy.Spider):
         krovati = response.css('div._Ud0k')
         for krovat in krovati:
             yield {
-                'name': krovat.css('div.lsooF span::text').get()
-                'price': krovat.css('div.pY3d2 span::text').get()
-
+                'name': krovat.css('div.lsooF span::text').get(),
+                'price': krovat.css('div.pY3d2 span::text').get(),
+                'url': krovat.css('a').attrib['href']
             }
