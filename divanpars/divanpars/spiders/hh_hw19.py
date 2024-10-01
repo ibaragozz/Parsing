@@ -8,17 +8,17 @@ browser.get("https://tomsk.hh.ru/vacancies/programmist")
 
 time.sleep(3)
 
-vacancies = browser.find_elements(By.CLASS_NAME, "vacancy-card--H8LvOiOGPll0jZvYpxIF")
+vacancies = browser.find_element(By.CLASS_NAME, "vacancy-card--hhzAtjuXrYFMBMspDjrF")
 print (vacancies)
 
 parsed_data = []
 
 for vacancy in vacancies:
     try:
-        title = vacancy.find_element(By.CSS_SELECTOR, 'span.vacancy-name--SYbxrgpHgHedVTkgI_cA').text
-        company = vacancy.find_element(By.CSS_SELECTOR, 'span.company-info-text--O32pGCRW0YDmp3BHuNOP').text
-        salary = vacancy.find_element(By.CSS_SELECTOR, 'span.compensation-text--cCPBXayRjn5GuLFWhGTJ').text
-        link = vacancy.find_element(By.CSS_SELECTOR, 'a.bloko-link').get_attribute('href')
+        title = vacancy.find_element(By.CSS_SELECTOR, 'span.serp-item__title-text').text
+        company = vacancy.find_element(By.CSS_SELECTOR, 'span.vacancy-serp__vacancy-employer-text').text
+        salary = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___pbpft_3-0-15').text
+        link = vacancy.find_element(By.CSS_SELECTOR, 'a.magritte-link___b4rEM_4-3-2'.get_attribute('href'))
     except:
         print('Error detected!')
         continue
