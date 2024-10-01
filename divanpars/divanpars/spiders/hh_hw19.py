@@ -18,12 +18,13 @@ for vacancy in vacancies:
         title = vacancy.find_element(By.CSS_SELECTOR, 'span.serp-item__title-text').text
         company = vacancy.find_element(By.CSS_SELECTOR, 'span.vacancy-serp__vacancy-employer-text').text
         salary = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___pbpft_3-0-15').text
-        link = vacancy.find_element(By.CSS_SELECTOR, 'a.magritte-link___b4rEM_4-3-2'.get_attribute('href'))
+        link = vacancy.find_element(By.CSS_SELECTOR, 'a.magritte-link___b4rEM_4-3-2').get_attribute('href')
     except:
         print('Error detected!')
         continue
 
-parsed_data.append([title, company, salary, link])
+    parsed_data.append([title, company, salary, link])
+    
 browser.quit()
 
 with open("hh.csv', 'w',newline=", encoding='utf-8') as file:
