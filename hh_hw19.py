@@ -3,31 +3,32 @@ import csv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-browser = webdriver.Chrome()
-browser.get("https://kaluga.hh.ru/vacancies/programmist?customDomain=1")
+driver = webdriver.Chrome()
+
+url = "https://www.divan.ru/category/svet"
+
+driver.get(url)
 
 time.sleep(3)
 
-vacancies = browser.find_elements(By.CLASS_NAME, "vacancy-info--umZA61PpMY07JVJtomBA")
-print (vacancies)
+lights = driver.find_elements(By.CLASS_NAME, '_Ud0k')
 
 parsed_data = []
 
-for vacancy in vacancies:
+for light in lights:
     try:
-        title = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___pbpft_3-0-15 magritte-text_style-primary___AQ7MW_3-0-15 magritte-text_typography-title-4-semibold___vUqki_3-0-15').text
-        company = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___pbpft_3-0-15 magritte-text_style-primary___AQ7MW_3-0-15 magritte-text_typography-label-3-regular___Nhtlp_3-0-15').text
-        salary = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___pbpft_3-0-15 magritte-text_style-primary___AQ7MW_3-0-15 magritte-text_typography-label-1-regular___pi3R-_3-0-15').text
-        link = vacancy.find_element(By.CSS_SELECTOR, 'a.Biyib').get_attribute('href')
+        name = light.find_element(By.CSS_SELECTOR, 'span[itemprop="name"]').text
+        link = light.find_element(By.CSS_SELECTOR, value='a.ui-GPFV8.qUioe.ProductName').get_attribute('href')
+        price = light.find_element(By.CSS_SELECTOR, 'span.ui-LD-ZU').text
     except:
-        print('Error detected!')
+        print("Произошла ошибка при парсинге!")
         continue
 
-    parsed_data.append([title, company, salary, link])
+    parsed_data.append([name, price, link])
 
-browser.quit()
+driver.quit()
 
-with open("hh_hw19.csv", 'w', newline="", encoding='utf-8') as file:
+with open("hw19.csv", 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
-    writer.writerow(['Название вакансии', 'Название компании', 'Зарплата','Ссылка на вакансию'])
+    writer.writerow(['Наименование товара', 'Цена', 'Ссылка на товар'])
     writer.writerows(parsed_data)
